@@ -1,18 +1,18 @@
 {
   "license": "MIT",
   "scripts": {
-    "build": "yarn parcel build",
-    "start": "electron ."
+    "serve": "yarn parcel build && electron .",
+    "reset": "rm -rf .parcel-cache && rm -rf dist && rm -rf node_modules && rm yarn.lock && yarn install"
   },
   "targets": {
+    "electron": {
+      "source": "src/electron.ts",
+      "context": "electron-main"
+    },
     "renderer": {
       "source": "src/index.html",
       "context": "electron-renderer",
       "publicUrl": "./"
-    },
-    "electron": {
-      "source": "src/electron.ts",
-      "context": "electron-main"
     }
   },
   "main": "dist/electron/electron.js",
