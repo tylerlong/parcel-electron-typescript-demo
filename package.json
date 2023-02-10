@@ -1,8 +1,7 @@
 {
   "license": "MIT",
   "scripts": {
-    "serve": "yarn parcel build && electron .",
-    "reset": "rm -rf .parcel-cache && rm -rf dist && rm -rf node_modules && rm yarn.lock && yarn install"
+    "serve": "rm -rf dist && yarn parcel build --no-cache && electron ."
   },
   "targets": {
     "electron": {
@@ -11,19 +10,25 @@
     },
     "renderer": {
       "source": "src/index.html",
-      "context": "electron-renderer",
-      "publicUrl": "./"
+      "context": "browser",
+      "publicUrl": "."
     }
   },
   "main": "dist/electron/electron.js",
   "devDependencies": {
     "@types/node": "^18.13.0",
+    "@types/react": "^18.0.27",
+    "events": "^3.1.0",
     "gts": "^3.1.1",
     "parcel": "^2.8.3",
     "typescript": "^4.9.5",
     "yarn-upgrade-all": "^0.7.2"
   },
   "dependencies": {
-    "electron": "^23.0.0"
+    "@tylerlong/use-proxy": "^1.1.0",
+    "antd-mobile": "^5.28.0",
+    "electron": "^23.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
