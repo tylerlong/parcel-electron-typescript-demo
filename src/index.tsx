@@ -29,6 +29,9 @@ class App extends Component<{store: Store}> {
         <Button color="primary" fill="outline" onClick={() => store.increase()}>
           +
         </Button>
+        <Button onClick={() => console.log(global.versions.electron())}>
+          Print Electron Version
+        </Button>
       </>
     );
   }

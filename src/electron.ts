@@ -1,11 +1,12 @@
 import {app, BrowserWindow} from 'electron';
+import path from 'path';
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 1000,
     height: 800,
     webPreferences: {
-      nodeIntegration: false,
+      preload: path.join(__dirname, '../dist/preload/preload.js'),
     },
   });
   mainWindow.loadFile('dist/renderer/index.html');

@@ -8,6 +8,10 @@
       "source": "src/electron.ts",
       "context": "electron-main"
     },
+    "preload": {
+      "source": "src/preload.ts",
+      "context": "node"
+    },
     "renderer": {
       "source": "src/index.html",
       "context": "browser",
