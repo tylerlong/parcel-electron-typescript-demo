@@ -1,7 +1,7 @@
 {
   "license": "MIT",
   "scripts": {
-    "serve": "yarn parcel --target renderer",
+    "serve": "yarn parcel --target renderer --no-cache",
     "build": "rm -rf dist && yarn parcel build --no-cache",
     "start": "yarn build && electron ."
   },
@@ -12,7 +12,8 @@
     },
     "preload": {
       "source": "src/preload.ts",
-      "context": "node"
+      "context": "node",
+      "distDir": "dist/renderer"
     },
     "renderer": {
       "source": "src/index.html",

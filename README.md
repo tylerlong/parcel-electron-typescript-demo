@@ -33,12 +33,12 @@ yarn build
 
 ## Todo
 
-- Fix all warnings and errors
 - Avoid manual rebuild. Hot reload
 - preload code complete
   - easier way to get preload code done
     - auto code generation?
 - validate release process
+- monorepo
 
 
 ## Notes
