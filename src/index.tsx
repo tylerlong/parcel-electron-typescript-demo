@@ -29,7 +29,7 @@ class App extends Component<{store: Store}> {
         <Button color="primary" fill="outline" onClick={() => store.increase()}>
           +
         </Button>
-        <Button onClick={async () => alert(await global.preload.readFile())}>
+        <Button onClick={async () => alert(await preload.readFile())}>
           Read File
         </Button>
       </>
