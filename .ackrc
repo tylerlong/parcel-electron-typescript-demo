@@ -1,0 +1,4 @@
+--ignore-dir=dist
+--ignore-dir=build
+--ignore-dir=.parcel-cache
+--ignore-dir=node_modules
