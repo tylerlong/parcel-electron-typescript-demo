@@ -1,12 +1,14 @@
 {
   "name": "parcel-electron-typescript-demo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
+  "author": "Tyler Liu",
+  "description": "Parcel Electron TypeScript Demo",
   "scripts": {
     "serve": "yarn parcel --target renderer --no-cache",
     "build": "rm -rf build && yarn parcel build --no-cache --dist-dir=build",
     "start": "yarn build && electron .",
-    "release": "ts-node -r dotenv-override-true/config src/electron-builder.ts"
+    "release": "cp icon.png build && ts-node -r dotenv-override-true/config src/electron-builder.ts"
   },
   "targets": {
     "electron": {
