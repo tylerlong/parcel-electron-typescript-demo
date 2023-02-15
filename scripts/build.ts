@@ -22,7 +22,7 @@ const build = async (app: string) => {
 
   const config1: InitialParcelOptions = {
     ...commonConfig,
-    entries: `apps/${app}/src/electron.ts`,
+    entries: `apps/${app}/electron.ts`,
     targets: {
       electron: {
         context: 'electron-main',
@@ -32,7 +32,7 @@ const build = async (app: string) => {
   };
   const config2: InitialParcelOptions = {
     ...commonConfig,
-    entries: `apps/${app}/src/preload.ts`,
+    entries: `apps/${app}/preload.ts`,
     targets: {
       preload: {
         context: 'node',
@@ -42,7 +42,7 @@ const build = async (app: string) => {
   };
   const config3: InitialParcelOptions = {
     ...commonConfig,
-    entries: `apps/${app}/src/index.html`,
+    entries: `apps/${app}/index.html`,
     targets: {
       renderer: {
         context: 'browser',

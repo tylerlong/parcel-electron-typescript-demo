@@ -4,6 +4,9 @@
   "license": "MIT",
   "author": "Tyler Liu",
   "description": "Parcel Electron TypeScript Demo",
+  "engines": {
+    "node": ">=19"
+  },
   "scripts": {
     "cmd": "rm -rf build && ts-node scripts/cmd.ts",
     "release": "yarn build && cp src/*.png build && ts-node -r dotenv-override-true/config src/electron-builder.ts"

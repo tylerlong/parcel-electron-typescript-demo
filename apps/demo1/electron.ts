@@ -11,7 +11,6 @@ const createWindow = () => {
         __dirname,
         '..',
         '..',
-        '..',
         'build',
         'renderer',
         'preload.js'
