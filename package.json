@@ -5,27 +5,9 @@
   "author": "Tyler Liu",
   "description": "Parcel Electron TypeScript Demo",
   "scripts": {
-    "serve": "yarn parcel --target renderer --no-cache",
-    "build": "rm -rf build && yarn parcel build --no-cache --dist-dir=build",
-    "build2": "ts-node src/scripts.ts",
+    "build": "ts-node src/scripts.ts",
     "start": "yarn build && electron .",
-    "release": "cp icon.png build && ts-node -r dotenv-override-true/config src/electron-builder.ts"
-  },
-  "targets": {
-    "electron": {
-      "source": "src/electron.ts",
-      "context": "electron-main"
-    },
-    "preload": {
-      "source": "src/preload.ts",
-      "context": "node",
-      "distDir": "build/renderer"
-    },
-    "renderer": {
-      "source": "src/index.html",
-      "context": "browser",
-      "publicUrl": "."
-    }
+    "release": "rm -rf build && yarn build && cp icon.png build && ts-node -r dotenv-override-true/config src/electron-builder.ts"
   },
   "main": "build/electron/electron.js",
   "devDependencies": {

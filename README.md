@@ -11,12 +11,6 @@ VSCode settings.json
 
 ## Commands
 
-### Start the renderer code as a website
-
-```
-yarn serve
-```
-
 ### Build everything in production mode and start electron
 
 ```
@@ -30,13 +24,18 @@ yarn start
 yarn build
 ```
 
+### Release the app
+
+```
+yarn release
+```
+
 
 ## Todo
 
 - Avoid manual rebuild. Hot reload
 - easier way to get preload code done
   - auto code generation?
-- validate release process
 - monorepo
 
 
