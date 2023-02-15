@@ -1,6 +1,9 @@
 import {Parcel} from '@parcel/core';
+import {InitialParcelOptions} from '@parcel/types';
 
-const commonConfig = {
+const app = 'demo1';
+
+const commonConfig: InitialParcelOptions = {
   defaultConfig: '@parcel/config-default',
   shouldDisableCache: true,
   mode: 'production',
@@ -18,9 +21,9 @@ const commonConfig = {
   },
 };
 
-const config1 = {
+const config1: InitialParcelOptions = {
   ...commonConfig,
-  entries: 'src/electron.ts',
+  entries: `apps/${app}/src/electron.ts`,
   targets: {
     electron: {
       context: 'electron-main',
@@ -28,9 +31,9 @@ const config1 = {
     },
   },
 };
-const config2 = {
+const config2: InitialParcelOptions = {
   ...commonConfig,
-  entries: 'src/preload.ts',
+  entries: `apps/${app}/src/preload.ts`,
   targets: {
     preload: {
       context: 'node',
@@ -38,9 +41,9 @@ const config2 = {
     },
   },
 };
-const config3 = {
+const config3: InitialParcelOptions = {
   ...commonConfig,
-  entries: 'src/index.html',
+  entries: `apps/${app}/src/index.html`,
   targets: {
     renderer: {
       context: 'browser',
@@ -55,7 +58,7 @@ const config3 = {
 
 const main = async () => {
   for (const config of [config1, config2, config3]) {
-    const bundler = new Parcel(config as any);
+    const bundler = new Parcel(config);
     await bundler.run();
   }
 };

@@ -7,7 +7,15 @@ const createWindow = () => {
     width: 1000,
     height: 800,
     webPreferences: {
-      preload: path.join(__dirname, '../build/renderer/preload.js'),
+      preload: path.join(
+        __dirname,
+        '..',
+        '..',
+        '..',
+        'build',
+        'renderer',
+        'preload.js'
+      ),
     },
   });
   mainWindow.loadFile('build/renderer/index.html');
