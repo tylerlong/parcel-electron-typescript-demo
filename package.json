@@ -5,8 +5,7 @@
   "author": "Tyler Liu",
   "description": "Parcel Electron TypeScript Demo",
   "scripts": {
-    "build": "rm -rf build && ts-node scripts/cmd.ts",
-    "start": "yarn build && electron .",
+    "cmd": "rm -rf build && ts-node scripts/cmd.ts",
     "release": "yarn build && cp src/*.png build && ts-node -r dotenv-override-true/config src/electron-builder.ts"
   },
   "main": "build/electron/electron.js",
