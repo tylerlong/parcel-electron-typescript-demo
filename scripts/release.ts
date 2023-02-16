@@ -7,6 +7,9 @@ import {
   build as electronBuild,
 } from 'electron-builder';
 import {notarize} from 'electron-notarize';
+import dotenv from 'dotenv-override-true';
+
+dotenv.config();
 
 const release = async (app: string) => {
   fs.copyFileSync(
@@ -17,7 +20,8 @@ const release = async (app: string) => {
     path.join(__dirname, '..', 'apps', app, 'icon.png'),
     path.join(__dirname, '..', 'build', 'icon.png')
   );
-  const metadata: Metadata = await import(`../apps/${app}/metadata.ts`);
+  const metadata: Metadata = (await import(`../apps/${app}/metadata.ts`))
+    .default;
   const options: CliOptions = {
     x64: true,
     arm64: true,
