@@ -1,9 +1,7 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
-
 import {useProxy} from '@tylerlong/use-proxy';
 import {Component} from '@tylerlong/use-proxy/build/react';
-
 import {Button} from 'antd-mobile';
 
 class Store {
