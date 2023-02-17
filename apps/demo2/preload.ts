@@ -2,7 +2,7 @@ import {BrowserWindow, dialog} from 'electron';
 import fs from 'fs';
 
 class Preload {
-  async readFile() {
+  async readFile(...args: string[]) {
     const r = await dialog.showOpenDialog(BrowserWindow.getFocusedWindow()!, {
       filters: [
         {
@@ -18,7 +18,7 @@ class Preload {
     return undefined;
   }
 
-  async method2(event, ...args: string[]) {
+  async method2(...args: string[]) {
     console.log(args);
     return 'done';
   }

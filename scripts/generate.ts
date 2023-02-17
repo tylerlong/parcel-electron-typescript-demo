@@ -40,7 +40,10 @@ import Preload from '../preload';
 
 const preload = new Preload();
 ${methods
-  .map(method => `ipcMain.handle('${method}', preload.${method});`)
+  .map(
+    method =>
+      `ipcMain.handle('${method}', (event, ...args: string[]) => preload.${method}(...args));`
+  )
   .join('\n')}
 `.trim() + '\n';
   fs.writeFileSync(path.join(generatedFolder, 'ipc-main.ts'), ipcMainTs);
