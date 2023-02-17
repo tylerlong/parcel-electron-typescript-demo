@@ -6,22 +6,25 @@ import generate from './generate';
 
 const execute = async (app: string, command: string) => {
   switch (command) {
+    case 'generate': {
+      await generate(app);
+      break;
+    }
     case 'build': {
+      await generate(app);
       await build(app);
       break;
     }
     case 'start': {
+      await generate(app);
       await build(app);
       await run('yarn', 'electron', '.');
       break;
     }
     case 'release': {
+      await generate(app);
       await build(app);
       await release(app);
-      break;
-    }
-    case 'generate': {
-      await generate(app);
       break;
     }
     default: {

@@ -1,6 +1,7 @@
-import {app, BrowserWindow, ipcMain, dialog} from 'electron';
+import {app, BrowserWindow} from 'electron';
 import path from 'path';
-import fs from 'fs';
+
+import './generated/ipc-main';
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -36,20 +37,4 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
-});
-
-ipcMain.handle('readFile', async () => {
-  const r = await dialog.showOpenDialog(BrowserWindow.getFocusedWindow()!, {
-    filters: [
-      {
-        name: 'Text File',
-        extensions: ['txt'],
-      },
-    ],
-    properties: ['openFile'],
-  });
-  if (!r.canceled) {
-    return fs.readFileSync(r.filePaths[0], 'utf-8');
-  }
-  return undefined;
 });
