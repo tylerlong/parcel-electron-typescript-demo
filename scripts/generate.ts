@@ -3,6 +3,10 @@ import fs from 'fs';
 
 const generate = async (app: string) => {
   const appFolder = path.join(__dirname, '..', 'apps', app);
+  const generatedFolder = path.join(appFolder, 'generated');
+  if (!fs.existsSync(generatedFolder)) {
+    fs.mkdirSync(generatedFolder);
+  }
   const Preload = (await import(path.join(appFolder, 'preload.ts'))).default;
   const methods = Reflect.ownKeys(Preload.prototype)
     .map(s => s.toString())
@@ -17,7 +21,7 @@ ${methods
   .join('\n')}
 });
   `.trim() + '\n';
-  fs.writeFileSync(path.join(appFolder, 'generated', 'preload.ts'), preloadTs);
+  fs.writeFileSync(path.join(generatedFolder, 'preload.ts'), preloadTs);
   const ipcMainTs =
     `
 import {ipcMain} from 'electron';
@@ -28,7 +32,7 @@ ${methods
   .map(method => `ipcMain.handle('${method}', preload.${method});`)
   .join('\n')}
 `.trim() + '\n';
-  fs.writeFileSync(path.join(appFolder, 'generated', 'ipc-main.ts'), ipcMainTs);
+  fs.writeFileSync(path.join(generatedFolder, 'ipc-main.ts'), ipcMainTs);
 };
 
 export default generate;
