@@ -23,7 +23,10 @@ import {contextBridge, ipcRenderer} from 'electron';
 
 contextBridge.exposeInMainWorld('preload', {
 ${methods
-  .map(method => `  ${method}: () => ipcRenderer.invoke('${method}'),`)
+  .map(
+    method =>
+      `  ${method}: (...args: string[]) => ipcRenderer.invoke('${method}', ...args),`
+  )
   .join('\n')}
 });
   `.trim() + '\n';
@@ -46,7 +49,7 @@ ${methods
   const typesDts =
     `
 declare namespace preload {
-${methods.map(method => `  function ${method}();`).join('\n')}
+${methods.map(method => `  function ${method}(...args: string[]);`).join('\n')}
 }
 `.trim() + '\n';
   fs.writeFileSync(path.join(generatedFolder, 'types.d.ts'), typesDts);

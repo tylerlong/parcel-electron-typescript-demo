@@ -18,8 +18,9 @@ class Preload {
     return undefined;
   }
 
-  async method2() {
-    console.log('method2');
+  async method2(event, ...args: string[]) {
+    console.log(args);
+    return 'done';
   }
 }
 

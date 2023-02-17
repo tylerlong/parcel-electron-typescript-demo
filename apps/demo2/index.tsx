@@ -30,6 +30,11 @@ class App extends Component<{store: Store}> {
         <Button onClick={async () => alert(await preload.readFile())}>
           Read File
         </Button>
+        <Button
+          onClick={async () => alert(await preload.method2('Hello world'))}
+        >
+          hello world
+        </Button>
       </>
     );
   }
