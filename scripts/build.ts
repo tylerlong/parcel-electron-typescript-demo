@@ -32,7 +32,7 @@ const build = async (app: string) => {
   };
   const config2: InitialParcelOptions = {
     ...commonConfig,
-    entries: `apps/${app}/preload.ts`,
+    entries: `apps/${app}/generated/preload.ts`,
     targets: {
       preload: {
         context: 'node',

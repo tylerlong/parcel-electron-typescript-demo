@@ -1,5 +1,26 @@
-import {contextBridge, ipcRenderer} from 'electron';
+import {BrowserWindow, dialog} from 'electron';
+import fs from 'fs';
 
-contextBridge.exposeInMainWorld('preload', {
-  readFile: () => ipcRenderer.invoke('readFile'),
-});
+class Preload {
+  async readFile() {
+    const r = await dialog.showOpenDialog(BrowserWindow.getFocusedWindow()!, {
+      filters: [
+        {
+          name: 'Text File',
+          extensions: ['txt'],
+        },
+      ],
+      properties: ['openFile'],
+    });
+    if (!r.canceled) {
+      return fs.readFileSync(r.filePaths[0], 'utf-8');
+    }
+    return undefined;
+  }
+
+  async method2() {
+    console.log('method2');
+  }
+}
+
+export default Preload;

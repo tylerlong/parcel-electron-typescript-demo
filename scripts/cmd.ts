@@ -2,6 +2,7 @@ import parse from './parse';
 import build from './build';
 import {run} from './utils';
 import release from './release';
+import generate from './generate';
 
 const execute = async (app: string, command: string) => {
   switch (command) {
@@ -17,6 +18,10 @@ const execute = async (app: string, command: string) => {
     case 'release': {
       await build(app);
       await release(app);
+      break;
+    }
+    case 'generate': {
+      await generate(app);
       break;
     }
     default: {

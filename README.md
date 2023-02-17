@@ -49,3 +49,8 @@ cannot find module 'electron'
 ```
 
 Don't know why in dev mode 'electron' cannot be found
+
+
+## Ref
+
+- https://www.debugandrelease.com/the-ultimate-electron-guide/
