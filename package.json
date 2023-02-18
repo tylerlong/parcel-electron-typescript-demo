@@ -9,11 +9,11 @@
   "main": "build/electron/electron.js",
   "devDependencies": {
     "@tylerlong/use-proxy": "^1.1.0",
-    "@types/node": "^18.13.0",
+    "@types/node": "^18.14.0",
     "@types/react": "^18.0.28",
     "antd-mobile": "^5.28.0",
     "dotenv-override-true": "^6.2.2",
-    "electron": "^23.0.0",
+    "electron": "^23.1.0",
     "electron-builder": "^23.6.0",
     "electron-notarize": "^1.2.2",
     "events": "^3.3.0",
