@@ -1,7 +1,16 @@
 import {Parcel} from '@parcel/core';
 import {InitialParcelOptions} from '@parcel/types';
+import fs from 'fs';
+import path from 'path';
 
 const build = async (app: string) => {
+  const buildFolder = path.join(__dirname, '..', 'build');
+  if(fs.existsSync(buildFolder)) {
+    fs.rmSync(buildFolder, {
+      recursive: true,
+      force: true,
+    });
+  }
   const commonConfig: InitialParcelOptions = {
     defaultConfig: '@parcel/config-default',
     shouldDisableCache: true,

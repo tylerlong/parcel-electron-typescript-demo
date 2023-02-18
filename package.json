@@ -4,7 +4,7 @@
     "node": ">=19"
   },
   "scripts": {
-    "cmd": "rm -rf build && ts-node scripts/cmd.ts"
+    "cmd": "ts-node scripts/cmd.ts"
   },
   "main": "build/electron/electron.js",
   "devDependencies": {
