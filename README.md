@@ -39,10 +39,9 @@ yarn cmd -a demo2 -c release
 ## Todo
 
 - Avoid manual rebuild. Hot reload
-- https://github.com/AlloyTeam/eslint-config-alloy/blob/master/README.zh-CN.md
 - https://www.electronforge.io/core-concepts/why-electron-forge
-- Replace antd-mobile with antd
-- ipc two way communication
+- App menu
+- Content menu
 
 
 ## Notes
