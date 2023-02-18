@@ -41,7 +41,6 @@ yarn cmd -a demo2 -c release
 - Avoid manual rebuild. Hot reload
 - https://github.com/AlloyTeam/eslint-config-alloy/blob/master/README.zh-CN.md
 - https://www.electronforge.io/core-concepts/why-electron-forge
-- eslint after generate
 
 
 ## Notes

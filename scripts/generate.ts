@@ -1,6 +1,8 @@
 import path from 'path';
 import fs from 'fs';
 
+import {run} from './utils';
+
 const generate = async (app: string) => {
   const appFolder = path.join(__dirname, '..', 'apps', app);
   const generatedFolder = path.join(appFolder, 'generated');
@@ -57,6 +59,8 @@ ${methods.map(method => `  function ${method}(...args: string[]);`).join('\n')}
 }
 `.trim() + '\n';
   fs.writeFileSync(path.join(generatedFolder, 'types.d.ts'), typesDts);
+
+  await run('yarn', 'eslint', generatedFolder, '--fix');
 };
 
 export default generate;
