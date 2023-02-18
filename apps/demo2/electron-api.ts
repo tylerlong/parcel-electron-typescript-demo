@@ -19,7 +19,7 @@ class ElectronAPI {
     return undefined;
   }
 
-  async method2(message: string) {
+  async method2(event, message: string) {
     console.log(message);
     await waitFor({interval: 10});
     return 'done';

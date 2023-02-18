@@ -1,8 +1,6 @@
 import path from 'path';
 import fs from 'fs';
 
-import {run} from './utils';
-
 const generate = async (app: string) => {
   const appFolder = path.join(__dirname, '..', 'apps', app);
   const generatedFolder = path.join(appFolder, 'generated');
@@ -28,7 +26,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
 ${methods
   .map(
     method =>
-      `  ${method}: (...args: string[]) => ipcRenderer.invoke('${method}', ...args),`
+      `  ${method}: (...args) => ipcRenderer.invoke('${method}', ...args),`
   )
   .join('\n')}
 });
@@ -44,8 +42,9 @@ import ElectronAPI from '../electron-api';
 const electronAPI = new ElectronAPI();
 ${methods
   .map(
-    method =>
-      `ipcMain.handle('${method}', (event, ...args: string[]) => Reflect.apply(electronAPI.${method}, electronAPI, args));`
+    method => `ipcMain.handle('${method}', (...args) =>
+  Reflect.apply(electronAPI.${method}, electronAPI, args)
+);`
   )
   .join('\n')}
 `.trim() + '\n';
@@ -55,12 +54,10 @@ ${methods
   const typesDts =
     `
 declare namespace electronAPI {
-${methods.map(method => `  function ${method}(...args: string[]);`).join('\n')}
+${methods.map(method => `  function ${method}(...args);`).join('\n')}
 }
 `.trim() + '\n';
   fs.writeFileSync(path.join(generatedFolder, 'types.d.ts'), typesDts);
-
-  await run('yarn', 'eslint', generatedFolder, '--fix');
 };
 
 export default generate;
