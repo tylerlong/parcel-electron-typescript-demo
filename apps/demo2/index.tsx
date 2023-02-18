@@ -40,6 +40,10 @@ class App extends Component<{store: Store}> {
   }
 }
 
+electronAPI.onMessage((event, message) => {
+  console.log(message);
+});
+
 const container = document.createElement('div');
 document.body.appendChild(container);
 const root = createRoot(container);

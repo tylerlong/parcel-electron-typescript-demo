@@ -2,7 +2,9 @@ import {BrowserWindow, dialog} from 'electron';
 import fs from 'fs';
 import waitFor from 'wait-for-async';
 
-class ElectronAPI {
+import BaseElectronAPI from '../../common/base-electron-api';
+
+export class ElectronAPI extends BaseElectronAPI {
   async readFile() {
     const r = await dialog.showOpenDialog(BrowserWindow.getFocusedWindow()!, {
       filters: [
@@ -26,4 +28,5 @@ class ElectronAPI {
   }
 }
 
-export default ElectronAPI;
+const electronAPI = new ElectronAPI();
+export default electronAPI;

@@ -11,9 +11,9 @@ const generate = async (app: string) => {
     });
   }
   fs.mkdirSync(generatedFolder);
-  const ElectronAPI = (await import(path.join(appFolder, 'electron-api.ts')))
-    .default;
-  const methods = Reflect.ownKeys(ElectronAPI.prototype)
+  const electronAPI = (await import(path.join(appFolder, 'electron-api.ts')))
+    .ElectronAPI;
+  const methods = Reflect.ownKeys(electronAPI.prototype)
     .map(s => s.toString())
     .filter(name => name !== 'constructor');
 
@@ -29,6 +29,7 @@ ${methods
       `  ${method}: (...args) => ipcRenderer.invoke('${method}', ...args),`
   )
   .join('\n')}
+  onMessage: callback => ipcRenderer.on('from-electron', callback),
 });
   `.trim() + '\n';
   fs.writeFileSync(path.join(generatedFolder, 'preload.ts'), preloadTs);
@@ -37,9 +38,8 @@ ${methods
   const ipcMainTs =
     `
 import {ipcMain} from 'electron';
-import ElectronAPI from '../electron-api';
+import electronAPI from '../electron-api';
 
-const electronAPI = new ElectronAPI();
 ${methods
   .map(
     method => `ipcMain.handle('${method}', (...args) =>
@@ -55,6 +55,7 @@ ${methods
     `
 declare namespace electronAPI {
 ${methods.map(method => `  function ${method}(...args);`).join('\n')}
+  function onMessage(callback);
 }
 `.trim() + '\n';
   fs.writeFileSync(path.join(generatedFolder, 'types.d.ts'), typesDts);

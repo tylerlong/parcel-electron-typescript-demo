@@ -1,7 +1,8 @@
-import {app, BrowserWindow} from 'electron';
+import {app, BrowserWindow, Menu} from 'electron';
 import path from 'path';
 
 import './generated/ipc-main';
+import electronAPI from './electron-api';
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -18,6 +19,20 @@ const createWindow = () => {
       ),
     },
   });
+
+  const menu = Menu.buildFromTemplate([
+    {
+      label: app.name,
+      submenu: [
+        {
+          click: () => electronAPI.send(mainWindow, 'From Electron'),
+          label: 'To Renderer',
+        },
+      ],
+    },
+  ]);
+  Menu.setApplicationMenu(menu);
+
   mainWindow.loadFile('build/renderer/index.html');
 
   mainWindow.webContents.openDevTools();
