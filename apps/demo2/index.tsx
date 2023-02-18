@@ -27,11 +27,11 @@ class App extends Component<{store: Store}> {
         <Button color="primary" fill="outline" onClick={() => store.increase()}>
           +
         </Button>
-        <Button onClick={async () => alert(await preload.readFile())}>
+        <Button onClick={async () => alert(await electronAPI.readFile())}>
           Read File
         </Button>
         <Button
-          onClick={async () => alert(await preload.method2('Hello world'))}
+          onClick={async () => alert(await electronAPI.method2('Hello world'))}
         >
           hello world
         </Button>

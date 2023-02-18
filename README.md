@@ -40,6 +40,8 @@ yarn cmd -a demo2 -c release
 
 - Avoid manual rebuild. Hot reload
 - https://github.com/AlloyTeam/eslint-config-alloy/blob/master/README.zh-CN.md
+- https://www.electronforge.io/core-concepts/why-electron-forge
+- eslint after generate
 
 
 ## Notes
@@ -65,3 +67,4 @@ Solution is to put an `tsconfig.json` file in the root of each app. Even an empt
 ## Ref
 
 - https://www.debugandrelease.com/the-ultimate-electron-guide/
+- https://www.electronjs.org/docs/latest/tutorial/ipc#pattern-3-main-to-renderer

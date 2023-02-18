@@ -1,8 +1,9 @@
 import {BrowserWindow, dialog} from 'electron';
 import fs from 'fs';
+import waitFor from 'wait-for-async';
 
-class Preload {
-  async readFile(...args: string[]) {
+class ElectronAPI {
+  async readFile() {
     const r = await dialog.showOpenDialog(BrowserWindow.getFocusedWindow()!, {
       filters: [
         {
@@ -18,10 +19,11 @@ class Preload {
     return undefined;
   }
 
-  async method2(...args: string[]) {
-    console.log(args);
+  async method2(message: string) {
+    console.log(message);
+    await waitFor({interval: 10});
     return 'done';
   }
 }
 
-export default Preload;
+export default ElectronAPI;

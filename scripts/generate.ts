@@ -11,8 +11,9 @@ const generate = async (app: string) => {
     });
   }
   fs.mkdirSync(generatedFolder);
-  const Preload = (await import(path.join(appFolder, 'preload.ts'))).default;
-  const methods = Reflect.ownKeys(Preload.prototype)
+  const ElectronAPI = (await import(path.join(appFolder, 'electron-api.ts')))
+    .default;
+  const methods = Reflect.ownKeys(ElectronAPI.prototype)
     .map(s => s.toString())
     .filter(name => name !== 'constructor');
 
@@ -21,7 +22,7 @@ const generate = async (app: string) => {
     `
 import {contextBridge, ipcRenderer} from 'electron';
 
-contextBridge.exposeInMainWorld('preload', {
+contextBridge.exposeInMainWorld('electronAPI', {
 ${methods
   .map(
     method =>
@@ -36,13 +37,13 @@ ${methods
   const ipcMainTs =
     `
 import {ipcMain} from 'electron';
-import Preload from '../preload';
+import ElectronAPI from '../electron-api';
 
-const preload = new Preload();
+const electronAPI = new ElectronAPI();
 ${methods
   .map(
     method =>
-      `ipcMain.handle('${method}', (event, ...args: string[]) => preload.${method}(...args));`
+      `ipcMain.handle('${method}', (event, ...args: string[]) => Reflect.apply(electronAPI.${method}, electronAPI, args));`
   )
   .join('\n')}
 `.trim() + '\n';
@@ -51,7 +52,7 @@ ${methods
   // types.d.ts
   const typesDts =
     `
-declare namespace preload {
+declare namespace electronAPI {
 ${methods.map(method => `  function ${method}(...args: string[]);`).join('\n')}
 }
 `.trim() + '\n';
