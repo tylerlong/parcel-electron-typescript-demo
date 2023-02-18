@@ -12,8 +12,8 @@ const generate = async (app: string) => {
   }
   fs.mkdirSync(generatedFolder);
   const electronAPI = (await import(path.join(appFolder, 'electron-api.ts')))
-    .ElectronAPI;
-  const methods = Reflect.ownKeys(electronAPI.prototype)
+    .default;
+  const methods = Reflect.ownKeys(electronAPI.constructor.prototype)
     .map(s => s.toString())
     .filter(name => name !== 'constructor');
 
