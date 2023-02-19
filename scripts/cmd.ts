@@ -15,6 +15,10 @@ const execute = async (app: string, command: string) => {
       await build(app);
       break;
     }
+    case 'watch': {
+      await build(app, true);
+      break;
+    }
     case 'start': {
       await generate(app);
       await build(app);

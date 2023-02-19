@@ -3,9 +3,9 @@ import {InitialParcelOptions} from '@parcel/types';
 import fs from 'fs';
 import path from 'path';
 
-const build = async (app: string) => {
+const build = async (app: string, watch = false) => {
   const buildFolder = path.join(__dirname, '..', 'build');
-  if(fs.existsSync(buildFolder)) {
+  if (fs.existsSync(buildFolder)) {
     fs.rmSync(buildFolder, {
       recursive: true,
       force: true,
@@ -64,9 +64,14 @@ const build = async (app: string) => {
     },
   };
 
-  for (const config of [config1, config2, config3]) {
-    const bundler = new Parcel(config);
-    await bundler.run();
+  if (watch) {
+    const bundler = new Parcel(config3);
+    await bundler.watch();
+  } else {
+    for (const config of [config1, config2, config3]) {
+      const bundler = new Parcel(config);
+      await bundler.run();
+    }
   }
 };
 

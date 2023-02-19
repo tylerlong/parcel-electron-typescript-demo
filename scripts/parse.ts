@@ -5,7 +5,7 @@ import {Command} from 'commander';
 const apps = fs
   .readdirSync(path.join(__dirname, '..', 'apps'))
   .filter(name => !name.startsWith('.'));
-const commands = ['build', 'start', 'release', 'generate'];
+const commands = ['build', 'start', 'release', 'generate', 'watch'];
 
 const parse = () => {
   const program = new Command();

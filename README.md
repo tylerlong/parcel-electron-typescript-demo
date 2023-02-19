@@ -35,6 +35,15 @@ yarn cmd -a demo2 -c start
 yarn cmd -a demo2 -c release
 ```
 
+### Watch the renderer code
+
+```
+yarn cmd -a demo2 -c watch
+```
+
+I will watch and re-compile the renderer code.
+You may cmd-R to refresh electron.
+
 
 ## Todo
 
