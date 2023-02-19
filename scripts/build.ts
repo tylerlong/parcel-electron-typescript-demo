@@ -29,7 +29,7 @@ const build = async (app: string, watch = false) => {
     },
   };
 
-  const config1: InitialParcelOptions = {
+  const electronMainConfig: InitialParcelOptions = {
     ...commonConfig,
     entries: `apps/${app}/electron.ts`,
     targets: {
@@ -39,7 +39,7 @@ const build = async (app: string, watch = false) => {
       },
     },
   };
-  const config2: InitialParcelOptions = {
+  const preloadConfig: InitialParcelOptions = {
     ...commonConfig,
     entries: `apps/${app}/generated/preload.ts`,
     targets: {
@@ -49,7 +49,7 @@ const build = async (app: string, watch = false) => {
       },
     },
   };
-  const config3: InitialParcelOptions = {
+  const electronRendererConfig: InitialParcelOptions = {
     ...commonConfig,
     entries: `apps/${app}/index.html`,
     targets: {
@@ -65,10 +65,14 @@ const build = async (app: string, watch = false) => {
   };
 
   if (watch) {
-    const bundler = new Parcel(config3);
+    const bundler = new Parcel(electronRendererConfig);
     await bundler.watch();
   } else {
-    for (const config of [config1, config2, config3]) {
+    for (const config of [
+      electronMainConfig,
+      preloadConfig,
+      electronRendererConfig,
+    ]) {
       const bundler = new Parcel(config);
       await bundler.run();
     }
