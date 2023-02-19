@@ -2043,6 +2043,11 @@ ejs@^3.1.7:
   dependencies:
     jake "^10.8.5"
 
+electron-application-menu-template@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/electron-application-menu-template/-/electron-application-menu-template-0.4.0.tgz#f02d3cbe012a2924d19c8c476dfedd9beb6ea08d"
+  integrity sha512-38lY3GicCtQQptNEsuZ9y7gX0Tb8RBZm4LQGCfdI9cBetBmkVbDy8p8voNF3t28i/EzGiQlH2EEXnnCmNbwSww==
+
 electron-builder@^23.6.0:
   version "23.6.0"
   resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-23.6.0.tgz#c79050cbdce90ed96c5feb67c34e9e0a21b5331b"

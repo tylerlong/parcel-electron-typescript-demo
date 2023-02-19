@@ -1,5 +1,6 @@
-import {app, BrowserWindow, Menu} from 'electron';
+import {app, BrowserWindow, Menu, MenuItemConstructorOptions} from 'electron';
 import path from 'path';
+import {newTemplate} from 'electron-application-menu-template';
 
 import './generated/ipc-main';
 import electronAPI from './electron-api';
@@ -20,17 +21,20 @@ const createWindow = () => {
     },
   });
 
-  const menu = Menu.buildFromTemplate([
+  const template = newTemplate();
+  const fileMenu = template.find(item => item.label === 'File')!;
+  (fileMenu.submenu! as MenuItemConstructorOptions[]).unshift(
     {
-      label: app.name,
-      submenu: [
-        {
-          click: () => electronAPI.send(mainWindow, 'From Electron'),
-          label: 'To Renderer',
-        },
-      ],
+      label: 'To Renderer',
+      async click() {
+        electronAPI.send(mainWindow, 'From Electron');
+      },
     },
-  ]);
+    {
+      type: 'separator',
+    }
+  );
+  const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 
   mainWindow.loadFile('build/renderer/index.html');
