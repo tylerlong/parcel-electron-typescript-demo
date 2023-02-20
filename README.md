@@ -47,24 +47,11 @@ You may cmd-R to refresh electron.
 
 ## Todo
 
-- Avoid manual rebuild. Hot reload
-- https://www.electronforge.io/core-concepts/why-electron-forge
-- App menu
-- Content menu
+- Context menu
+- Auto update
 
 
 ## Notes
-
-### `yarn parcel watch` doesn't work
-
-```
-Unable to load preload script
-cannot find module 'electron'
-```
-
-Don't know why in dev mode 'electron' cannot be found
-
-Todo: try again
 
 ### global.d.ts scope
 
